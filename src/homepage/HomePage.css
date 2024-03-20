@@ -1,0 +1,29 @@
+.background-container{
+    bottom: 20px;
+    height: 500px;
+    background-image: url("../../public/assets/law1.png");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    /*background-color: black!important;*/
+    opacity: 90%;
+}
+
+.text-overlay{
+    color: white;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+
+}
+
+@media (max-width: 768px) {
+    .text-overlay{
+        left: 10px;
+        align-content: center;
+        top: 20%;
+    }
+    .background-container{
+        height: 300px;
+    }
+}

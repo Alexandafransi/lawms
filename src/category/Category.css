@@ -1,0 +1,47 @@
+
+#category-list{
+    background-color: whitesmoke;
+    position: relative;
+    height: 500px;
+    bottom: 18px;
+
+}
+
+#title-category{
+    margin-top: 30px;
+}
+
+/* Category.css or your custom CSS file */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%); /* Change color to black */
+}
+
+/* Add this to your Category.css file */
+#category-card .carousel-inner {
+    display: flex;
+    margin-top: 2%;
+}
+
+/* Media query for screens up to 768 pixels */
+@media (max-width: 768px) {
+    .carousel-col {
+        width: 100%!important;
+    }
+    #small-size{
+        display: block!important;
+    }
+
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+    #large-size{
+        display: block!important;
+    }
+
+}
+
+@media (min-width: 1025px) {
+    #large-size {
+        display: block !important;
+    }
+}

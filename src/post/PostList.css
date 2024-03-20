@@ -1,0 +1,42 @@
+/*#title-post{*/
+/*    margin-bottom: 60px;*/
+/*}*/
+
+
+#background-image{
+    bottom: 20px;
+    height: 400px;
+    background-image: url("../../public/assets/law3.jpg");
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    /*background-color: black!important;*/
+    opacity: 90%;
+}
+
+@media (max-width:768px) {
+    #background-image{
+        height: 250px;
+        opacity: 90%;
+    }
+    #column1{
+        /*margin-top: 1%;*/
+
+    }
+
+    #column2{
+        /*margin-top: 2%;*/
+        /*background-color: #908484!important;*/
+
+    }
+
+    #column3{
+        margin-top: 5%;
+
+    }
+
+    #column4{
+        margin-top: 5%;
+
+    }
+}

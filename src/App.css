@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  /*background-color: #282c34;*/
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -22,6 +22,15 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+body{
+  background-color: white!important;
+}
+
+#card-style{
+  width:100%;
+  background:#FAF6F6;
+  border:none
 }
 
 .App-link {
@@ -34,5 +43,14 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@media (max-width: 769px) {
+  #getinId{
+    margin-left:8%!important;
+
+  }
+  #card-style{
+    background-color: #FAF6F6;
   }
 }

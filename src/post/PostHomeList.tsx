@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import {Card, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-
+import postData from "./PostData.json";
 
 
 function PostHomeList() {
@@ -15,10 +15,15 @@ function PostHomeList() {
         content:string,
         img:string
     }
-    const postData:postdata[] = [
-        { id: 1, title: "Title 1", date: "2024/02/27", time: "12:00 pm", content: "Lorem ipsum dolor sit amet consectetur...",img:"/assets/law3.jpg" },
-        { id: 2, title: "Title 2", date: "2024/02/28", time: "1:00 pm", content: "Lorem ipsum dolor sit amet consectetur...", img:"/assets/law3.jpg"},
-    ];
+
+    const sortedPosts = postData.sort((a:postdata,b:postdata)=>{
+        const dateA = new Date(`${a.date} ${a.time}`).getTime();
+        const dateB = new Date(`${b.date} ${b.time}`).getTime();
+        return dateB - dateA;
+    });
+
+    // Get the first six elements from the sorted array
+    const latestPosts = sortedPosts.slice(0,6);
     return    <>
         <Container fluid >
             <Row>
@@ -36,7 +41,7 @@ function PostHomeList() {
 
 
             <Row>
-                {postData.map((post)=>(
+                {latestPosts.map((post:postdata)=>(
                     <Col md={2} key={post.id}>
                         <div>
                             <Card style={{marginTop:"5%"}}>
@@ -70,7 +75,11 @@ function PostHomeList() {
                         </div>
                     </Col>
                 ))}
+                <Col style={{marginTop:"1%",marginBottom:"1%"}}>
+                    <Link to='/posts' style={{ textDecoration:"none", float:"right"}}> view all post..</Link>
+                </Col>
             </Row>
+
         </Container>
     </>
 

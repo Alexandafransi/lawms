@@ -76,7 +76,7 @@ function PostList() {
             <Container fluid style={{marginTop:"2%"}}>
                 <Row>
                     <Col md={6} id="column1">
-
+                        <h4>Post List</h4>
                     </Col>
                     <Col md={2} style={{ paddingRight: "5px", paddingLeft: "0px" }} id="column2">
                         <Form.Control type="date" placeholder="date"/>

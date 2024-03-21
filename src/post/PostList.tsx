@@ -5,51 +5,19 @@ import './PostList.css';
 import postData from "./PostData.json";
 
 
-interface PostData {
-    id: number;
-    title: string;
-    date: string;
-    time: string;
-    content: string;
-    img: string;
-}
 function PostList() {
 
-    // const [postData,setPostData] = useState<PostData[]>([]);
-    // const [currentPage, setCurrentPage] = useState(1);
-    // const postsPerPage = 12;
-    // const [loading, setLoading] = useState(true);
 
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 12
     const [loading, setLoading] = useState(true);
     // fetch data from json file
     useEffect(() => {
-        // fetch("./PostData.json", {
-        //
-        // })
-        //     .then(response => {
-        //         if (!response.ok) {
-        //             throw new Error('Network response was not ok');
-        //         }
-        //         return response.json();
-        //     })
-        //     .then(data => {
-        //         setPostData(data);
-        //         setLoading(false);
-        //     })
-        //     .catch(error => {
-        //         console.error('Error fetching data:', error);
-        //         setLoading(false);
-        //     });
+
         setTimeout(()=>{
             setLoading(false);
         },1000);
     }, []);
-
-    // const indexOfLastPost = currentPage* postsPerPage;
-    // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    // const currentPosts = postData.slice(indexOfFirstPost,indexOfLastPost)
 
     const totalPosts = postData.length;
     const totalPages = Math.ceil(totalPosts/ postsPerPage);

@@ -1,6 +1,6 @@
 [
   {"id": 1, "title": "Title 1", "date": "2024/02/27", "time": "12:00 pm", "content": "Lorem ipsum dolor sit amet consectetur...", "img": "/assets/law3.jpg"},
-  {"id": 2, "title": "Title 2", "date": "2024/02/28", "time": "1:00 pm", "content": "Lorem ipsum dolor sit amet consectetur...", "img": "/assets/law3.jpg"},
+  {"id": 2, "title": "Title 2", "date": "2024/02/27", "time": "1:00 pm", "content": "Lorem ipsum dolor sit amet consectetur...", "img": "/assets/law3.jpg"},
   {"id": 3, "title": "Title 3", "date": "2024/02/29", "time": "2:00 pm", "content": "Lorem ipsum dolor sit amet consectetur...", "img": "/assets/law3.jpg"},
   {"id": 4, "title": "Title 4", "date": "2024/03/01", "time": "3:00 pm", "content": "Lorem ipsum dolor sit amet consectetur...", "img": "/assets/law3.jpg"},
   {"id": 5, "title": "Title 5", "date": "2024/03/02", "time": "4:00 pm", "content": "Lorem ipsum dolor sit amet consectetur...", "img": "/assets/law3.jpg"},

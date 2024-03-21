@@ -3,7 +3,7 @@ import {useLocation, useParams} from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import {Card, Col, Row} from "react-bootstrap";
 import postData from "./PostData.json";
-import latestPosts from "./SortedPost";
+import latestPosts from "./SortedPostDesc";
 
 
 

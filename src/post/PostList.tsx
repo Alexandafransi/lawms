@@ -1,8 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import Container from "react-bootstrap/Container";
 import {Col, Row, Form, Card, Spinner, Pagination} from "react-bootstrap";
 import './PostList.css';
 import postData from "./PostData.json";
+import handleChangeDate from "./DateFormat";
+import sortedPostsAsc from "./SortedPostAsc";
 
 
 function PostList() {
@@ -11,7 +13,16 @@ function PostList() {
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 12
     const [loading, setLoading] = useState(true);
-    // fetch data from json file
+    const [searchDate, setSearchDate] = useState("");
+    const [filteredPosts, setFilteredPosts] = useState<any[]>([]);
+
+    const [sortOrder, setSortOrder] = useState("");
+    const prevSortOrder = useRef<string>("");
+
+    const [searchTitle, setSearchTitle] = useState("");
+    const prevSearch = useRef<string>("");
+
+
     useEffect(() => {
 
         setTimeout(()=>{
@@ -19,7 +30,50 @@ function PostList() {
         },1000);
     }, []);
 
-    const totalPosts = postData.length;
+    useEffect(()=>{
+        const date:string = handleChangeDate(searchDate)
+        if (searchDate){
+            const filtered = postData.filter(post=>post.date === date);
+            setFilteredPosts(filtered);
+        }else {
+            setFilteredPosts(postData);
+        }
+    },[searchDate]);
+
+    useEffect(() => {
+        if (sortOrder !== prevSortOrder.current) {
+            prevSortOrder.current = sortOrder;
+            if (sortOrder === "Descending") {
+                const sorted = [...filteredPosts].sort((a, b) => {
+                    const dateA = new Date(`${a.date} ${a.time}`).getTime();
+                    const dateB = new Date(`${b.date} ${b.time}`).getTime();
+                    return dateB - dateA;
+                });
+                setFilteredPosts(sorted);
+            } else if (sortOrder === "Ascending") {
+                const sorted = [...filteredPosts].sort((a, b) => {
+                    const dateA = new Date(`${a.date} ${a.time}`).getTime();
+                    const dateB = new Date(`${b.date} ${b.time}`).getTime();
+                    return dateA - dateB;
+                });
+                setFilteredPosts(sorted);
+            }
+        }
+    }, [sortOrder, filteredPosts]);
+
+    useEffect(() => {
+        if (searchTitle !== prevSearch.current) {
+            prevSearch.current = searchTitle;
+            if (!searchTitle) {
+                setFilteredPosts(filteredPosts);
+            } else {
+                const filtered = postData.filter(post => post.title.toLowerCase().includes(searchTitle.toLowerCase()));
+                setFilteredPosts(filtered);
+            }
+        }
+    }, [filteredPosts, searchTitle]);
+
+    const totalPosts = filteredPosts.length;
     const totalPages = Math.ceil(totalPosts/ postsPerPage);
     const paginate = function (pageNumber:number) {
         return setCurrentPage(pageNumber);
@@ -27,7 +81,7 @@ function PostList() {
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirsPost = indexOfLastPost - postsPerPage;
-    const currentPosts = postData.slice(indexOfFirsPost,indexOfLastPost);
+    const currentPosts = filteredPosts.slice(indexOfFirsPost,indexOfLastPost);
     return(
         <>
             <Container fluid id="background-image"  style={{position:"relative"}}>
@@ -47,19 +101,24 @@ function PostList() {
                         <h4>Post List</h4>
                     </Col>
                     <Col md={2} style={{ paddingRight: "5px", paddingLeft: "0px" }} id="column2">
-                        <Form.Control type="date" placeholder="date"/>
+                        <Form.Control type="date" placeholder="date" value={searchDate} onChange={(e)=>setSearchDate(e.target.value)}/>
                     </Col>
 
                     <Col md={2} style={{ paddingRight: "5px", paddingLeft: "5px" }} id="column3">
-                        <Form.Select aria-label="sort-post">
+                        <Form.Select aria-label="sort-post" onChange={(e) => setSortOrder(e.target.value)}>
                             <option>Sort Post by Date</option>
-                            <option>Ascending</option>
-                            <option>Descending</option>
+                            <option value="Ascending">Ascending</option>
+                            <option value="Descending">Descending</option>
                         </Form.Select>
                     </Col>
 
                     <Col md={2} style={{ paddingRight: "0px", paddingLeft: "5px" }} id="column4">
-                        <Form.Control type="text" placeholder="search by title or category..."/>
+                        <Form.Control
+                            type="text"
+                            placeholder="search by title or category..."
+                            value={searchTitle}
+                            onChange={(e) => setSearchTitle(e.target.value)}
+                        />
                     </Col>
 
                 </Row>
@@ -67,6 +126,7 @@ function PostList() {
 
             <Container fluid style={{marginTop:"3%"}}>
                 <Row>
+
                     {
                         loading ? (
                             <div style={{marginLeft:"5%"}}>
@@ -79,6 +139,7 @@ function PostList() {
                             currentPosts.map(post=>(
                                 <Col md={2} key={post.id}>
                                     <div>
+
                                         <Card style={{marginTop:"5%"}}>
                                             <Card.Img variant="top" src="/assets/law3.jpg"/>
                                             <Card.Body style={{padding:"5px"}}>
@@ -107,6 +168,7 @@ function PostList() {
                     }
 
                 </Row>
+
 
                 <Row>
                     <Col style={{marginTop: "2%"}}>

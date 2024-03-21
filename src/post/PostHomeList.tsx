@@ -2,7 +2,7 @@ import React from "react";
 import Container from "react-bootstrap/Container";
 import {Card, Col, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
-import latestPosts from "./SortedPost";
+import latestPosts from "./SortedPostDesc";
 
 function PostHomeList() {
 
